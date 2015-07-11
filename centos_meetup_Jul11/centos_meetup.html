@@ -364,7 +364,7 @@ ul.auto-toc {
 </div>
 <div id="footer">
 <h1>Lets Talk about systemd</h1>
-<h2>Generated on: 2015-07-09 07:40 UTC.
+<h2>Generated on: 2015-07-11 04:06 UTC.
 </h2>
 </div>
 </div>
@@ -377,11 +377,11 @@ ul.auto-toc {
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">name:</th><td class="field-body">Praveen Kumar</td>
+<tr class="field"><th class="field-name">Name:</th><td class="field-body">Praveen Kumar</td>
 </tr>
-<tr class="field"><th class="field-name">contact:</th><td class="field-body">kumarpraveen [AT] fedoraproject DOT org</td>
+<tr class="field"><th class="field-name">Contact:</th><td class="field-body">kumarpraveen [AT] fedoraproject DOT org</td>
 </tr>
-<tr class="field"><th class="field-name">date:</th><td class="field-body">2015-04-25</td>
+<tr class="field"><th class="field-name">Date:</th><td class="field-body">2015-07-11</td>
 </tr>
 </tbody>
 </table>
@@ -403,12 +403,14 @@ ul.auto-toc {
 <ul class="simple">
 <li>Modular</li>
 <li>Asynchronous and concurrent</li>
+<li>Create snapshot</li>
 <li>features a fully language-agnostic API</li>
 </ul>
+<p>... Much more</p>
 </div>
 <div class="slide" id="systemd-cont">
 <h1>systemd Cont...</h1>
-<img alt="images/systemd_parallel.jpg" class="align-center" src="images/systemd_parallel.jpg" style="width: 560.0px; height: 490.0px;" />
+<img alt="images/systemd_parallel.jpg" class="align-center" src="images/systemd_parallel.jpg" style="width: 490.0px; height: 420.0px;" />
 </div>
 <div class="slide" id="how-to-use-systemd">
 <h1>How to use systemd</h1>
@@ -421,8 +423,15 @@ ul.auto-toc {
 <li>List out services<ul>
 <li>systemctl list-units --type service</li>
 <li>systemctl list-units --type service --all</li>
+<li>systemctl list-unit-files --type=service</li>
+<li>ls /usr/lib/systemd/system/*.wants</li>
 </ul>
 </li>
+</ul>
+</div>
+<div class="slide" id="how-to-use-systemd-cont">
+<h1>How to use systemd cont...</h1>
+<ul class="simple">
 <li>List out targets<ul>
 <li>systemctl list-units --type targets</li>
 </ul>
@@ -443,11 +452,6 @@ After=network.target remote-fs.target nss-lookup.target
 [Service]
 Type=notify
 Environment=LANG=C
-</pre>
-</div>
-<div class="slide" id="service-file-template-cont">
-<h1>Service file Template cont...</h1>
-<pre class="literal-block">
 ExecStart=/usr/sbin/httpd $OPTIONS -DFOREGROUND
 ExecReload=/usr/sbin/httpd $OPTIONS -k graceful
 # Send SIGWINCH for graceful stop
@@ -457,6 +461,19 @@ PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
+</pre>
+</div>
+<div class="slide" id="systemd-snapshot">
+<h1>systemd snapshot</h1>
+<ul class="simple">
+<li>Crate a snapshot of existing unit config</li>
+</ul>
+<pre class="literal-block">
+$ sudo systemctl snapshot test
+$ sudo systemctl -all list-units | grep test
+$ sudo systemctl show test
+$ sudo systemctl isolate test.snapshot
+$ sudo systemctl delete test
 </pre>
 </div>
 <div class="slide" id="sysemd-nspawn">
@@ -470,8 +487,8 @@ $ sudo yum -y --nogpg --releasever=7 --installroot=/srv/mycontainer \
 install systemd passwd yum vim-minimal
 </pre>
 </div>
-<div class="slide" id="systemd-nspawn-cont">
-<h1>systemd-nspawn cont...</h1>
+<div class="slide" id="sysemd-nspawn-cont">
+<h1>sysemd-nspawn cont...</h1>
 <ul class="simple">
 <li>Setup container password</li>
 </ul>
@@ -485,9 +502,12 @@ $ sudo systemd-nspawn -D /srv/mycontainer
 $ sudo systemd-nspawn -jbD /srv/mycontainer
 </pre>
 </div>
-<div class="slide" id="questions">
-<h1>Questions</h1>
-<p><strong>?</strong></p>
+<div class="slide" id="resources">
+<h1>Resources</h1>
+<ul class="simple">
+<li><a class="reference external" href="http://www.freedesktop.org/wiki/Software/systemd">http://www.freedesktop.org/wiki/Software/systemd</a></li>
+<li><a class="reference external" href="http://linux.xvx.cz/2014/06/systemd-cheatsheet.html">http://linux.xvx.cz/2014/06/systemd-cheatsheet.html</a></li>
+</ul>
 </div>
 <div class="slide" id="thank-you">
 <h1>Thank You</h1>

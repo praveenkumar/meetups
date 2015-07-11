@@ -10,7 +10,7 @@ Lets Talk about systemd
 
 :Name: Praveen Kumar
 :Contact: kumarpraveen [AT] fedoraproject DOT org
-:Date: 2015-04-25
+:Date: 2015-07-11
 
 
 Agenda
@@ -29,7 +29,10 @@ What is systemd
 
 - Modular
 - Asynchronous and concurrent
+- Create snapshot
 - features a fully language-agnostic API
+
+... Much more
 
 
 systemd Cont...
@@ -54,6 +57,8 @@ How to use systemd
 
   + systemctl list-units --type service
   + systemctl list-units --type service --all
+  + systemctl list-unit-files --type=service
+  + ls /usr/lib/systemd/system/\*.wants
 
 
 How to use systemd cont...
@@ -89,6 +94,19 @@ Service file Template
     [Install]
     WantedBy=multi-user.target
 
+systemd snapshot
+================
+
+- Crate a snapshot of existing unit config
+
+::
+
+    $ sudo systemctl snapshot test
+    $ sudo systemctl -all list-units | grep test
+    $ sudo systemctl show test
+    $ sudo systemctl isolate test.snapshot
+    $ sudo systemctl delete test
+
 
 sysemd-nspawn
 =============
@@ -121,6 +139,7 @@ sysemd-nspawn cont...
 Resources
 =========
 - http://www.freedesktop.org/wiki/Software/systemd
+- http://linux.xvx.cz/2014/06/systemd-cheatsheet.html
 
 
 Thank You
